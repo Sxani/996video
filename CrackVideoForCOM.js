@@ -1,7 +1,7 @@
 var Count = 0;
 function fuckMain () {
 	//console.log(window.searchIsHome_var === undefined);
-	if(window.searchIsHome_var == 1 || window.searchIsHome_var === undefined)
+	/* if(window.searchIsHome_var == 1 || window.searchIsHome_var === undefined)
 	{
 		searchIsHome();
 	};
@@ -12,7 +12,7 @@ function fuckMain () {
 			Count=1;
 		}
 		
-	};
+	}; */
 	if(window.fuckSpeed_var == 1 || window.fuckSpeed_var === undefined)
 	{
 		fuckSpeed();
@@ -41,18 +41,32 @@ function setVideoEndApi () {
 		console.log( "VideoEnd" );
 		var GetOlid = getQueryVariable("olid");
 		var NextOlid = getNextCourses (GetOlid);
-		//console.log( "VideoEnd:" + getNextCourses (GetOlid) );
-		document.getElementsByClassName("outline rightArea")[0].getElementsByClassName("olitem li-video ")[NextOlid].getElementsByTagName("a")[0].click();
+		if(NextOlid != null) {
+            NextOlid.click();
+        }
+        //console.log( "olid666:" + GetOlid );
+        //console.log( "VideoEnd:" + getNextCourses (GetOlid) );
+        //document.getElementsByClassName("outline rightArea")[0].getElementsByClassName("olitem li-video ")[NextOlid].getElementsByTagName("a")[0].click();
 	};
 };
 
 function getNextCourses (variable) {
 	console.log( "getNextCoursesStart_Param:" + variable);
-	var ListCount = document.getElementsByClassName("outline rightArea")[0].getElementsByClassName("olitem li-video ");
+
+	var ListCount = document.getElementsByClassName("custom-tree-node");
+	var ListVideo = [];
 	for (var i = 0; i < ListCount.length; i++) {
-		var pair = document.getElementsByClassName("outline rightArea")[0].getElementsByClassName("olitem li-video ")[i].getAttribute("olid");
-		if(pair == variable){return i+1};
-	};
+		if(ListCount[i].getAttribute("isvideo")){
+			ListVideo.push(ListCount[i]);
+		}
+	}
+	for (var i = 0; i < ListVideo.length; i++) {
+		if(ListVideo[i].parentNode.parentNode.classList.contains("is-current")){
+			console.log("下一节课为："+ListVideo[i+1]);
+			return ListVideo[i+1];
+		}
+	}
+	return null;
 };
 
 function searchIsHome () {
