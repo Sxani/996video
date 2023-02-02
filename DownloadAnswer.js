@@ -1,4 +1,5 @@
 async function getAll() {
+  var saveText = "";
   var ddList = document.getElementsByClassName("question")[0].getElementsByTagName("dd");
   for (var clickNum = 0; clickNum < ddList.length;  clickNum++) {
       document.getElementsByClassName("move_btn")[0].getElementsByTagName("span")[1].click();
