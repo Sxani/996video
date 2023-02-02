@@ -19,11 +19,13 @@ async function getAll() {
           selection_collect += part_one + " " + part_two + "\n";
       } else {
           for(var j = 1; j < selectionList.length;  j++) {
+            if(selectionList[j].getElementsByTagName("i").length > 0) {
               // A .
               var part_one = selectionList[j].getElementsByTagName("i")[0].innerText;
               // 自然属性是人的本质属性
               var part_two = selectionList[j].getElementsByTagName("span")[0].innerText;
               selection_collect += part_one + part_two + "\n";
+            }
           }
       }
       // 答案
